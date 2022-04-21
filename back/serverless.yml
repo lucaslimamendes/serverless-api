@@ -1,0 +1,30 @@
+service: server-api
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+  profile: default
+  stage: dev
+
+plugins:
+  - serverless-offline
+
+functions:
+  stocksCreate:
+    handler: api/stocksCreate.handle
+    description: "Create stocks"
+    events:
+      - http:
+          path: stocks
+          method: post
+          cors: true
+  stocksList:
+    handler: api/stocksList.handle
+    description: "List stocks"
+    events:
+      - http:
+          path: stocks
+          method: get
+          cors: true
+  
